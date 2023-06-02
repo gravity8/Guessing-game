@@ -1,0 +1,54 @@
+<body>
+    <input id='input' type="number" placeholder="Enter a number">
+    <input class='button' value="submit" type="submit">
+    <p class="previous">Your guesses are: &nbsp;&nbsp;</p>
+    <p class="output"></p>
+    <button class="restart">Restart</button>
+
+    <script>
+        const button = document.querySelector('.button')
+        const guess= Math.floor(Math.random()*100)
+        const previous = document.querySelector('.previous')
+        const output = document.querySelector('.output')
+        const restart = document.querySelector('.restart')
+              click = 0
+        button.addEventListener('click',()=>{
+            const input=document.getElementById('input').value
+            console.log(input)
+            click++
+            if(click<7){
+                if(!(input=='')){
+                    if(input==guess){
+                        previous.textContent+=`${input} `
+                        output.textContent='You successfully guessed the number!!'
+                        output.style.backgroundColor='green'
+                    }
+                    else if(input>guess){
+                        previous.textContent+= `${input} `
+                        output.textContent='Your guess is too high'
+                        output.style.backgroundColor='red'
+                    }
+                    else{
+                        previous.textContent+= `${input} `
+                        output.textContent='Your guess is too low'
+                        output.style.backgroundColor='red'
+                    }
+                }
+                else{
+                    output.textContent='Please enter a number'
+                }
+            }
+            else{
+                previous.textContent+= `${input} `
+                output.textContent='Game over!! start over!!'
+            }
+            
+        })
+        restart.addEventListener('click',()=>{
+            click=0
+            previous.innerHTML='Your guesses are: &nbsp;&nbsp;'
+            output.textContent=''
+        })
+
+    </script>
+</body>
